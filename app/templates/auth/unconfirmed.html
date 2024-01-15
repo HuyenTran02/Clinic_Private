@@ -1,0 +1,21 @@
+{% extends "landing_page.html" %}
+{% block body %}
+<div class="full-center">
+  <div class="page-header">
+    <h1>Chào, {{ current_user.name }}!</h1>
+    <h3>Bạn chưa xác thực tài khoản của mình.</h3>
+    <div class='my-4'>
+      <p>
+        Trước khi có thể truy cập trang web này, bạn cần xác nhận tài khoản của mình.
+      </p>
+      <p>
+        Kiểm tra của bạn hộp thư đến, bạn hẳn đã nhận được một email có liên kết xác nhận.
+      </p>
+    </div>
+    <p>
+      Cần một email xác nhận khác?
+      <a href="{{ url_for('auth.send_mail_confirmation') }}">Bấm vào đây</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

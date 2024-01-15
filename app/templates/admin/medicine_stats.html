@@ -1,0 +1,96 @@
+{% extends 'admin/master.html' %}
+{% from 'admin/tabs.html' import tabs %}
+{% block body %}
+<div class='mb-5'>
+  {{tabs(active_tab)}}
+
+  <form action="{{url_for('medicine-stats.index')}}"
+    class='form w-100 mt-4 d-flex align-items-center justify-content-end'>
+    <div class='d-flex'>
+      <input value='{{year}}-{{month}}' type="month" id="month" name="month" class='form-control' />
+    </div>
+    <input type='submit' class='btn btn-primary submit-btn ml-2' value='Đồng ý' />
+    <div class='d-flex justify-content-end ml-2'>
+      <a href='{{url_for("export-medicine-stats-pdf.index")}}' onclick='exportPDF(this)' class="btn btn-danger">Xuất
+        PDF</a>
+    </div>
+  </form>
+
+  <div class='mt-2'>
+    <table class="table text-center">
+      <tr>
+        <th colspan='5'>BÁO CÁO SỬ DỤNG THUỐC</th>
+      </tr>
+      <tr>
+        <th colspan='5'>Tháng: {{month}}/{{year}}</th>
+      </tr>
+      <tr>
+        <th>STT</th>
+        <th>Thuốc</th>
+        <th>Đơn vị tính</th>
+        <th>Số lượng</th>
+        <th>Số lần dùng</th>
+      </tr>
+      {% if stats %}
+      {% for s in stats %}
+      <tr>
+        <th scope='row'>{{loop.index}}</th>
+        <td>{{s[0]}}</td>
+        <td>{{s[1]}}</td>
+        <td>{{s[2]}}</td>
+        <td>{{s[3]}}</td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan='5'>Không có dữ liệu trong tháng.</td>
+      </tr>
+      {% endif %}
+    </table>
+  </div>
+  <div class='mt-5'>
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  function exportPDF(e) {
+    const date = document.getElementById('month').value
+    e.setAttribute('href', "{{ url_for('export-medicine-stats-pdf.index') }}" + `?month=${date}`)
+  }
+
+  const ctx = document.getElementById('myChart')
+
+  const labels = []
+  const data = []
+
+  {% for stat in stats %}
+  labels.push('{{stat[0]}}')
+  data.push('{{stat[3]}}')
+  {% endfor %}
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Tần suất sử dụng thuốc',
+          data,
+          borderWidth: 1,
+          backgroundColor: ['#275182']
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  })
+</script>
+{% endblock %}

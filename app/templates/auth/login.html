@@ -1,0 +1,32 @@
+{% extends "landing_page.html" %}
+{% from 'bootstrap4/form.html' import render_form %}
+{% from 'bootstrap4/form.html' import render_field %}
+{% import '_macros.html' as macros %} {% block body %}
+
+<section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="
+    min-height: 100vh;
+    background-size: cover;
+    background-image: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-molecular-structure-illustration-medical-blue-gradient-background-image_199094.jpg);
+  ">
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center d-flex-row text-center h-100">
+      <div class="col-12 col-md-4 col-lg-3 h-50">
+        <div class="card shadow">
+          <div class="card-body mx-auto">
+            <h3 class="card-title mt-3 text-center text-info">ĐĂNG NHẬP</h3>
+            <p class="text-center">Vui lòng đăng nhập vào phòng khám</p>
+
+            {{macros.flash_messages()}}
+            {{render_form(form, extra_classes='no-label', novalidate=true)}}
+            <p class="text-center">
+              Bạn đã có tài khoản chưa ?
+              <a href="{{url_for('auth.register')}}">Đăng ký</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+.full-center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  background: rgb(39, 81, 130);
+}
+
+.text {
+  color: white;
+  font-size: 18px;
+}
+
+.text:hover {
+  color: #AEE4FF;
+}
+
+.title {
+  color: rgb(39, 81, 158)
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem 1.25rem;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+div.pagination {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  justify-content: center;
+}
+
+.no-label .form-control-label {
+  display: none;
+}
+
+.otp-field {
+  flex-direction: row;
+  column-gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otp-field input {
+  height: 45px;
+  width: 42px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1.125rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.otp-field input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.otp-field input::-webkit-inner-spin-button,
+.otp-field input::-webkit-outer-spin-button {
+  display: none;
+}
+
+.resend {
+  font-size: 12px;
+}
+
+#pay_options {
+  list-style: none;
+}
+
+#pay_options li {
+  padding: 14px;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  margin-bottom: 10px;
+}
+
+.stats-card {
+  background: rgb(39, 81, 130);
+}
